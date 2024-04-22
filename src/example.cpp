@@ -15,7 +15,10 @@ int main()
    std::cout << buffer << "\n\n";
    
    std::array<person, 2> another_directory;
-   glz::read_json(another_directory, buffer);
+   const auto error = glz::read_json(another_directory, buffer);
+   if (error) {
+      std::cerr << glz::format_error(error, buffer) << '\n';
+   }
    
    std::string another_buffer{};
    glz::write_json(another_directory, another_buffer);
